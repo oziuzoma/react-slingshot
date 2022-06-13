@@ -33,7 +33,7 @@ jobs:
     steps:
       - checkout
       - run:
-          name: "Run audit"
+          name: "Run auditing"
           command: |
             npm audit
 
