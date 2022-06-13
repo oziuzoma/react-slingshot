@@ -10,8 +10,13 @@ jobs:
       - image: circleci/node:13.8.0
     steps:
       - checkout
+      - run: npm i
+      - persist_to_workspace:
+          root: ~/
+          paths:
+            - output.txt
       - run:
-          name: "Say hello"
+          name: "Run lint"
           command: |
             npm run lint
 
@@ -20,8 +25,11 @@ jobs:
       - image: circleci/node:13.8.0
     steps:
       - checkout
+      - attach_workspace:
+          at: ~/
+      - run: npm i 
       - run:
-          name: "Say hello"
+          name: "Run tests"
           command: |
             npm run test
 
@@ -30,8 +38,10 @@ jobs:
       - image: circleci/node:13.8.0
     steps:
       - checkout
+      - attach_workspace:
+          at: ~/
       - run:
-          name: "Say hello"
+          name: "Run audit"
           command: |
             npm audit
 
